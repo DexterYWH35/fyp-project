@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "734792111898",
+    "firebase_url": "https://gropielearning-default-rtdb.firebaseio.com",
+    "project_id": "gropielearning",
+    "storage_bucket": "gropielearning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734792111898:android:f37af1ca2552e3b9eafea3",
+        "android_client_info": {
+          "package_name": "com.example.chatapp_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp7PhkoeJkDDjQhks1nNFxhg8MpHPUG9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

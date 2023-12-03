@@ -5,10 +5,12 @@ import 'package:chatapp_firebase/shared/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
 
+  WidgetsFlutterBinding.ensureInitialized();
+ 
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
@@ -20,11 +22,16 @@ void main() async {
     await Firebase.initializeApp();
   }
 
+     // initialize hive
+ await Hive.initFlutter();
+
+  // open the box
+  var box = await Hive.openBox("mybox");
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();

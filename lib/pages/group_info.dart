@@ -9,11 +9,10 @@ class GroupInfo extends StatefulWidget {
   final String groupName;
   final String adminName;
   const GroupInfo(
-      {Key? key,
+      {super.key,
       required this.adminName,
       required this.groupName,
-      required this.groupId})
-      : super(key: key);
+      required this.groupId});
 
   @override
   State<GroupInfo> createState() => _GroupInfoState();
@@ -99,6 +98,7 @@ class _GroupInfoState extends State<GroupInfo> {
               icon: const Icon(Icons.exit_to_app))
         ],
       ),
+
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
@@ -139,6 +139,7 @@ class _GroupInfoState extends State<GroupInfo> {
                 ],
               ),
             ),
+            const SizedBox(height: 10,),
             memberList(),
           ],
         ),
@@ -146,6 +147,7 @@ class _GroupInfoState extends State<GroupInfo> {
     );
   }
 
+  //group member lists
   memberList() {
     return StreamBuilder(
       stream: members,
@@ -158,6 +160,10 @@ class _GroupInfoState extends State<GroupInfo> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: Colors.orange[50],
+                    ),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child: ListTile(

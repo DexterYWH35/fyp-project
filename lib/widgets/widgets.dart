@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 const textInputDecoration = InputDecoration(
   labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderSide: BorderSide(color: Color.fromARGB(255, 190, 190, 190), width: 2),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderSide: BorderSide(color: Color.fromARGB(255, 190, 190, 190), width: 2),
   ),
   errorBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderSide: BorderSide(color: Color.fromARGB(255, 190, 190, 190), width: 2),
   ),
+  contentPadding: EdgeInsets.all(12),
 );
 
 void nextScreen(context, page) {

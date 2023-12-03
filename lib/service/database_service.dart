@@ -10,6 +10,7 @@ class DatabaseService {
   final CollectionReference groupCollection =
       FirebaseFirestore.instance.collection("groups");
 
+
   // saving the userdata
   Future savingUserData(String fullName, String email) async {
     return await userCollection.doc(uid).set({
@@ -44,6 +45,7 @@ class DatabaseService {
       "recentMessage": "",
       "recentMessageSender": "",
     });
+
     // update the members
     await groupDocumentReference.update({
       "members": FieldValue.arrayUnion(["${uid}_$userName"]),
@@ -133,4 +135,6 @@ class DatabaseService {
       "recentMessageTime": chatMessageData['time'].toString(),
     });
   }
+
+
 }

@@ -1,22 +1,29 @@
+import 'package:chatapp_firebase/data/database.dart';
 import 'package:chatapp_firebase/helper/helper_function.dart';
 import 'package:chatapp_firebase/pages/auth/login_page.dart';
 import 'package:chatapp_firebase/pages/profile_page.dart';
 import 'package:chatapp_firebase/pages/search_page.dart';
+import 'package:chatapp_firebase/pages/taskCreation_page.dart';
 import 'package:chatapp_firebase/service/auth_service.dart';
 import 'package:chatapp_firebase/service/database_service.dart';
 import 'package:chatapp_firebase/widgets/group_tile.dart';
 import 'package:chatapp_firebase/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+   // reference for the hive box
+  final _myBox = Hive.box("myBox");
+  ToDoDatabase db = ToDoDatabase();
+
   String userName = "";
   String email = "";
   AuthService authService = AuthService();
@@ -63,6 +70,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //APP bar
       appBar: AppBar(
         actions: [
           IconButton(
@@ -79,15 +87,20 @@ class _HomePageState extends State<HomePage> {
         title: const Text(
           "Groups",
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 27),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 27,
+          ),
         ),
       ),
+      //SIDE bar
       drawer: Drawer(
           child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 50),
+        //Returning List of item (Groups, Profile, Logout and Task Creation)
         children: <Widget>[
           Icon(
-            Icons.account_circle,
+            Icons.person,
             size: 150,
             color: Colors.grey[700],
           ),
@@ -105,18 +118,20 @@ class _HomePageState extends State<HomePage> {
           const Divider(
             height: 2,
           ),
+          //Groups
           ListTile(
             onTap: () {},
             selectedColor: Theme.of(context).primaryColor,
             selected: true,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            leading: const Icon(Icons.group),
+            leading: const Icon(Icons.groups),
             title: const Text(
               "Groups",
               style: TextStyle(color: Colors.black),
             ),
           ),
+          //Profile
           ListTile(
             onTap: () {
               nextScreenReplace(
@@ -128,12 +143,31 @@ class _HomePageState extends State<HomePage> {
             },
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            leading: const Icon(Icons.group),
+            leading: const Icon(Icons.person_pin_outlined),
             title: const Text(
               "Profile",
               style: TextStyle(color: Colors.black),
             ),
           ),
+          //Task Creation
+          ListTile(
+            onTap: () {
+              nextScreenReplace(
+                  context,
+                  const TaskCreation(
+                      // userName: userName,
+                      // email: email,
+                      ));
+            },
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            leading: const Icon(Icons.note_add_outlined),
+            title: const Text(
+              "Task",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          //Logout
           ListTile(
             onTap: () async {
               showDialog(
@@ -180,6 +214,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       )),
+      //END OF SIDE BAR//
       body: groupList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -244,8 +279,8 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor),
-                  child: const Text("CANCEL"),
+                      backgroundColor: Theme.of(context).primaryColor),
+                  child: const Text("CANCEL"), 
                 ),
                 ElevatedButton(
                   onPressed: () async {
@@ -266,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor),
+                      backgroundColor: Theme.of(context).primaryColor),
                   child: const Text("CREATE"),
                 )
               ],
