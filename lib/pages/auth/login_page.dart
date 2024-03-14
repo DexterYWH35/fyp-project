@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 40, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 10),
-                        const Text("Login now to see how we learn!",
+                        const Text("Login now to join our journey!",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w400)),
                         Image.asset("assets/newLogIn.png", fit: BoxFit.cover,),
